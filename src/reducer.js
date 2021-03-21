@@ -15,12 +15,7 @@ export default function reducer(state = [], action){
                 }
             ]
         case action.BUG_RESOLVED:
-            const target = state.filter(bug => bug.id === action.payload.id)
-            target.resolved = action.payload.resolved;
-            return[
-                ...state,
-                target
-            ]
+            return state.map(bug => bug.id !== action.payload ? bug: {...bug, resolved: true})
         case actions.BUG_REMOVED:
             return state.filter(bug => bug.id !== action.payload.id)
         default:
